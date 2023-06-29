@@ -36,7 +36,7 @@ namespace WindowsGSM.Plugins
             author = "ma-halo",
             description = "🧩 WindowsGSM plugin for Sons Of The Forest",
             version = "0.1",
-            url = ""https://github.com/ma-halo/WindowsGSM.SonsOfTheForest", 
+            url = "https://github.com/ma-halo/WindowsGSM.SonsOfTheForest", 
             color = "#5c1504" // Color Hex
         };
 
