@@ -45,38 +45,6 @@ namespace WindowsGSM.Plugins
 
         public async void CreateServerCFG()
         {
-            //Created dedicatedserver.cfg
-            string configPath = Functions.ServerPath.GetServersServerFiles(_serverData.ServerID, $"config\\dedicatedserver.cfg");
-            if (null == configPath)
-            {
-                string defaultConfig = @"
-                    {
-                        ""IpAddress"" ""{}"",
-                        ""GamePort"" 8766,
-                        ""QueryPort"" 27016,
-                        ""BlobSyncPort"" 9700,
-                        ""ServerName"": ""Sons Of The Forest Server (dedicated)"",
-                        ""MaxPlayers"": 8,
-                        ""Password"": """",
-                        ""LanOnly"": false,
-                        ""SaveSlot"": 1,
-                        ""SaveMode"": ""Continue"",
-                        ""GameMode"": ""Normal"",
-                        ""SaveInterval"": 600,
-                        ""IdleDayCycleSpeed"": 0.0,
-                        ""IdleTargetFramerate"": 5,
-                        ""ActiveTargetFramerate"": 60,
-                        ""LogFilesEnabled"": false,
-                        ""TimestampLogFilenames"": true,
-                        ""TimestampLogEntries"": true,
-                        ""SkipNetworkAccessibilityTest"": false,
-                        ""GameSettings"": { },
-                        ""CustomGameModeSettings"": { }
-                    }
-                ";
-                File.WriteAllText(configPath, defaultConfig);
-            }
-
             //Create steam_appid.txt
             string txtPath = Functions.ServerPath.GetServersServerFiles(_serverData.ServerID, "steam_appid.txt");
             File.WriteAllText(txtPath, "1326470");
