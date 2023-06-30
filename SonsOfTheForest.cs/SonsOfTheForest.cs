@@ -8,26 +8,6 @@ using WindowsGSM.Functions;
 
 namespace WindowsGSM.Plugins
 {
-    /// <summary>
-    /// 
-    /// Notes:
-    /// 7 Days to Die Dedicated Server has a special console template which, when RedirectStandardOutput=true, the console output is still working.
-    /// The console output seems have 3 channels, RedirectStandardOutput catch the first channel, RedirectStandardError catch the second channel, the third channel left on the game server console.
-    /// Moreover, it has his input bar on the bottom so a normal sendkey method is not working.
-    /// We need to send a {TAB} => (Send text) => {TAB} => (Send text) => {ENTER} to make the input cursor is on the input bar and send the command successfully.
-    /// 
-    /// RedirectStandardInput:  NOT WORKING
-    /// RedirectStandardOutput: YES (Used)
-    /// RedirectStandardError:  YES (Used)
-    /// SendKeys Input Method:  YES (Used)
-    /// 
-    /// There are two methods to shutdown this special server
-    /// 1. {TAB} => (Send shutdown) => {TAB} => (Send shutdown) => {ENTER}
-    /// 2. p.CloseMainWindow(); => {ENTER}
-    /// 
-    /// The second one is used.
-    /// 
-    /// </summary>
     public class SonsOfTheForest : SteamCMDAgent
     {
         public Plugin Plugin = new Plugin
@@ -36,7 +16,7 @@ namespace WindowsGSM.Plugins
             author = "ma-halo",
             description = "🧩 WindowsGSM plugin for Sons Of The Forest",
             version = "0.1",
-            url = "https://github.com/ma-halo/WindowsGSM.SonsOfTheForest", 
+            url = "https://github.com/ma-halo/WindowsGSM.SonsOfTheForest",
             color = "#5c1504" // Color Hex
         };
 
@@ -65,13 +45,13 @@ namespace WindowsGSM.Plugins
 
         public async void CreateServerCFG()
         {
-            //Download serverconfig.xml
-            string configPath = Functions.ServerPath.GetServersServerFiles(_serverData.ServerID, "dedicatedserver.cfg");
+            //Created dedicatedserver.cfg
+            string configPath = Functions.ServerPath.GetServersServerFiles(_serverData.ServerID, $"config\\dedicatedserver.cfg");
             if (null == configPath)
             {
                 string defaultConfig = @"
                     {
-                        ""IpAddress"" ""0.0.0.0"",
+                        ""IpAddress"" ""{}"",
                         ""GamePort"" 8766,
                         ""QueryPort"" 27016,
                         ""BlobSyncPort"" 9700,
@@ -94,11 +74,12 @@ namespace WindowsGSM.Plugins
                         ""CustomGameModeSettings"": { }
                     }
                 ";
+                File.WriteAllText(configPath, defaultConfig);
             }
 
             //Create steam_appid.txt
             string txtPath = Functions.ServerPath.GetServersServerFiles(_serverData.ServerID, "steam_appid.txt");
-            File.WriteAllText(txtPath, AppId);
+            File.WriteAllText(txtPath, "1326470");
         }
 
         public async Task<Process> Start()
@@ -119,12 +100,11 @@ namespace WindowsGSM.Plugins
             {
                 Notice = $"dedicatedserver.cfg not found ({configPath})";
             }
-
             string param = String.Empty;
             param += $" -dedicatedserver.IpAddress {_serverData.ServerIP}";
             param += $" -dedicatedserver.ServerName {_serverData.ServerName}";
             param += $" -dedicatedserver.MaxPlayers {_serverData.ServerMaxPlayer}";
-            param += $" -dedicatedserver.SkipNetworkAccessibilityTest true";
+            //param += $" -dedicatedserver.SkipNetworkAccessibilityTest true";
             param += $" -dedicatedserver.LogFilesEnabled true";
             param += $" -dedicatedserver.GamePort {_serverData.ServerPort}";
             param += $" -dedicatedserver.QueryPort {_serverData.ServerQueryPort}";
