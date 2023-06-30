@@ -11,7 +11,8 @@ The following fields are read from the config and applied to the server on start
 - Server Max Players (Between 1-8)
 
 You can add the following to the "Server Start Param" field (all on one line):
--dedicatedserver.Password "P@ssw0rd" -dedicatedserver.GameMode Normal -dedicatedserver.SkipNetworkAccessibilityTest true
+
+```-dedicatedserver.Password "P@ssw0rd" -dedicatedserver.GameMode Normal -dedicatedserver.SkipNetworkAccessibilityTest true```
 
 You can also set these values in the "dedicatedserver.cfg" which is in the "config" folder in the serverfiles directory.
 
