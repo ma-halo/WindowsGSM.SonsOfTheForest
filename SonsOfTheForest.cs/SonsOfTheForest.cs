@@ -70,7 +70,7 @@ namespace WindowsGSM.Plugins
             }
             string param = String.Empty;
             param += $" -dedicatedserver.IpAddress {_serverData.ServerIP}";
-            param += $" -dedicatedserver.ServerName {_serverData.ServerName}";
+            param += $" -dedicatedserver.ServerName \"{_serverData.ServerName}\"";
             param += $" -dedicatedserver.MaxPlayers {_serverData.ServerMaxPlayer}";
             //param += $" -dedicatedserver.SkipNetworkAccessibilityTest true";
             param += $" -dedicatedserver.LogFilesEnabled true";
